@@ -23,7 +23,7 @@ class Device:
         voltage = self.query(command)
         voltage = int(voltage)
         voltage = voltage/1023*ur('3.3V')
-        current = voltage/ur('220ohm')
+        current = voltage/ur('100ohm')
         return current.to('mA')
 
     def idn(self):
@@ -46,15 +46,15 @@ class Device:
         self.rsc.write(command)
 
     def finalize(self):
-        pass
+        self.rsc.close()
 
 
 dev = Device('/dev/ttyACM0')
 print(dev.idn())
 dev.set_voltage(0, ur('3.3V'))
-dev.set_voltage(0, ur('3.29V'))
 current = dev.read_voltage(0)
 print('Measured current: {}'.format(current))
+dev.finalize()
 
 # voltages = [i for i in range(4095) if i%50==0]
 # currents = []
