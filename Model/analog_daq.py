@@ -7,15 +7,13 @@ ur = pint.UnitRegistry()
 class AnalogDaq:
     def __init__(self, port, resistance):
         self.port = port
-        self.resistance = resistance
+        self.resistance = ur(resistance)
 
     def initialize(self):
         self.driver = SimpleDaq(self.port)
 
     def set_voltage(self, channel, voltage):
-        print(voltage)
         voltage = voltage.m_as('V')
-        print(voltage)
         voltage_int = int(voltage/3.3*4095)
         self.driver.set_analog_value(channel, voltage_int)
 

@@ -1,0 +1,11 @@
+DAQ:
+  port: /dev/ttyACM0
+  resistance: 100ohm
+
+Scan:
+  start: 0V
+  stop: 3.3V
+  step: 100mV
+  delay: 50ms
+  channel_out: 0
+  channel_in: 0
