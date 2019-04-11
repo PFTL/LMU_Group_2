@@ -29,6 +29,8 @@ class Experiment:
         self.voltages = np.arange(start.m_as('V'), stop.m_as('V')+step.m_as('V'), step.m_as('V'))
         self.currents = np.zeros((len(self.voltages)))
 
+        print(self.voltages)
+
         channel_out = self.params['Scan']['channel_out']
         channel_in = self.params['Scan']['channel_in']
 

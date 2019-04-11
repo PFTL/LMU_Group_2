@@ -27,19 +27,6 @@
        <string>Out</string>
       </property>
       <layout class="QGridLayout" name="gridLayout">
-       <item row="1" column="6">
-        <widget class="QLabel" name="label_4">
-         <property name="text">
-          <string>Step:</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="7">
-        <widget class="QLineEdit" name="outStepLine"/>
-       </item>
-       <item row="1" column="5">
-        <widget class="QLineEdit" name="outStopLine"/>
-       </item>
        <item row="1" column="4">
         <widget class="QLabel" name="label_3">
          <property name="text">
@@ -51,6 +38,13 @@
         <widget class="QLabel" name="label">
          <property name="text">
           <string>Port:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="6">
+        <widget class="QLabel" name="label_4">
+         <property name="text">
+          <string>Step:</string>
          </property>
         </widget>
        </item>
@@ -73,15 +67,21 @@
          </property>
         </widget>
        </item>
-       <item row="1" column="3">
-        <widget class="QLineEdit" name="outStartLine"/>
-       </item>
        <item row="1" column="2">
         <widget class="QLabel" name="label_2">
          <property name="text">
           <string>Start:</string>
          </property>
         </widget>
+       </item>
+       <item row="1" column="7">
+        <widget class="QLineEdit" name="outStepLine"/>
+       </item>
+       <item row="1" column="3">
+        <widget class="QLineEdit" name="outStartLine"/>
+       </item>
+       <item row="1" column="5">
+        <widget class="QLineEdit" name="outStopLine"/>
        </item>
       </layout>
      </widget>
@@ -92,6 +92,13 @@
        <string>In</string>
       </property>
       <layout class="QGridLayout" name="gridLayout_2">
+       <item row="0" column="2">
+        <widget class="QLabel" name="label_6">
+         <property name="text">
+          <string>Delay:</string>
+         </property>
+        </widget>
+       </item>
        <item row="0" column="1">
         <widget class="QLineEdit" name="inChannelLine">
          <property name="sizePolicy">
@@ -111,23 +118,6 @@
          </property>
         </widget>
        </item>
-       <item row="0" column="0">
-        <widget class="QLabel" name="label_5">
-         <property name="text">
-          <string>Port:</string>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="2">
-        <widget class="QLabel" name="label_6">
-         <property name="text">
-          <string>Delay:</string>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="3">
-        <widget class="QLineEdit" name="inDelayLine"/>
-       </item>
        <item row="0" column="4">
         <spacer name="horizontalSpacer">
          <property name="orientation">
@@ -140,6 +130,16 @@
           </size>
          </property>
         </spacer>
+       </item>
+       <item row="0" column="0">
+        <widget class="QLabel" name="label_5">
+         <property name="text">
+          <string>Port:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="3">
+        <widget class="QLineEdit" name="inDelayLine"/>
        </item>
       </layout>
      </widget>

@@ -65,6 +65,7 @@ class SimpleDaq():
         :param int port: Port number. Range depends on device
         :param int value: The output value in integers.
         """
+        print(value)
         write_string = 'OUT:CH{}:{}'.format(channel, value)
         self.write(write_string)
 

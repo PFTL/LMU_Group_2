@@ -4,6 +4,9 @@ from PyQt5 import uic
 import os
 import threading
 
+import pyqtgraph as pg
+
+
 class ScanWindow(QMainWindow):
     def __init__(self, experiment):
         super().__init__()
@@ -20,13 +23,42 @@ class ScanWindow(QMainWindow):
         self.timer.timeout.connect(self.update_start_button)
         self.timer.start(100)  # In milliseconds
 
+        self.outStartLine.setText(self.experiment.params['Scan']['start'])
+        self.outStepLine.setText(self.experiment.params['Scan']['step'])
+        self.outStopLine.setText(self.experiment.params['Scan']['stop'])
+        self.inDelayLine.setText(self.experiment.params['Scan']['delay'])
+
+        self.outChannelLine.setText(str(self.experiment.params['Scan']['channel_out']))
+        self.inChannelLine.setText(str(self.experiment.params['Scan']['channel_in']))
+
+        self.plot_widget = pg.PlotWidget()
+        self.plot = self.plot_widget.plot([0], [0])
+
+        layout = self.centralwidget.layout()
+        layout.addWidget(self.plot_widget)
+
     def update_start_button(self):
         if self.experiment.scan_running:
             self.start_button.setEnabled(False)
+            self.plot.setData(self.experiment.voltages, self.experiment.currents)
         else:
             self.start_button.setEnabled(True)
 
     def start_pressed(self):
+        start = self.outStartLine.text()
+        stop = self.outStopLine.text()
+        step = self.outStepLine.text()
+        channel_in = int(self.inChannelLine.text())
+        channel_out = int(self.outChannelLine.text())
+
+        self.experiment.params['Scan'].update({
+            'start': start,
+            'stop': stop,
+            'step': step,
+            'channel_in': channel_in,
+            'channel_out': channel_out
+        })
+
         t = threading.Thread(target=self.experiment.do_scan)
         t.start()
         self.start_button.setEnabled(False)
