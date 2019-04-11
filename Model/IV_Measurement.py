@@ -6,6 +6,9 @@ import pint
 ur = pint.UnitRegistry()
 
 class Experiment:
+    def __init__(self):
+        self.scan_running = False
+
     def load_config(self, filename):
         with open(filename, 'r') as f:
             self.params = yaml.load(f)
@@ -18,6 +21,7 @@ class Experiment:
         self.daq.initialize()
 
     def do_scan(self):
+        self.scan_running = True
         start = ur(self.params['Scan']['start'])
         stop = ur(self.params['Scan']['stop'])
         step = ur(self.params['Scan']['step'])
@@ -27,10 +31,16 @@ class Experiment:
 
         channel_out = self.params['Scan']['channel_out']
         channel_in = self.params['Scan']['channel_in']
+
+        self.stop_scan = False
         for i in range(len(self.voltages)):
             volt = self.voltages[i]
             self.daq.set_voltage(channel_out, volt*ur('V'))
             self.currents[i] = self.daq.read_current(channel_in).m_as('A')
+            if self.stop_scan:
+                break
+
+        self.scan_running = False
 
     def save_data(self, filename):
         np.savetxt(filename, [self.voltages, self.currents])

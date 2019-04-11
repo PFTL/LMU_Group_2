@@ -3,9 +3,9 @@ DAQ:
   resistance: 100ohm
 
 Scan:
-  start: 0V
+  start: 2V
   stop: 3.3V
   step: 100mV
-  delay: 50ms
+  delay: 150ms
   channel_out: 0
   channel_in: 0
